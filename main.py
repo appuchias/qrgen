@@ -25,7 +25,7 @@ Type of info to save to the QR code?
 
 option = int(input("> "))
 
-print("\nDo you want it to be saved into a png?\n(Type the name of the file below or leave empty to print it out to the terminal)")
+print("\nDo you want it to be saved into a png?\n(Type the name of the file below or leave it empty to just print it to the terminal)")
 filename = input("> ")
 save = len(filename) > 0
 
@@ -35,6 +35,7 @@ if option == 1:
     if save:
         qrcode.png(filename + ".png")
     print(qrcode.terminal(quiet_zone=2))
+    
 elif option == 2:
     wifi_name = input("Wifi name:\n> ")
     wifi_encryption = input("Wifi encryption type:\n> ")
@@ -43,8 +44,15 @@ elif option == 2:
     if save:
         qrcode.png(filename + ".png")
     print(qrcode.terminal(quiet_zone=2))
+    
 elif option == 3:
-    print("Option 3")
+    imgpath = input("\nType the image path:\n> ")
+    with open(imgpath, "b") as img:
+        qrcode = qr.create(img.read())
+    if save:
+        qrcode.png(filename + ".png")
+    print(qrcode.terminal(quiet_zone=2))
+    
 elif option == 4:
     print("Option 4")
 elif option == 5:
